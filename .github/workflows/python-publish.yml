@@ -1,7 +1,4 @@
-# This workflows will upload a Python Package using Twine when a release is created
-# For more information see: https://help.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions#publishing-to-package-registries
-
-name: Upload Python Package
+name: Python Package
 
 on:
   release:
@@ -9,23 +6,21 @@ on:
 
 jobs:
   deploy:
-
-    runs-on: ubuntu-latest
-
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-    - name: Install dependencies
+    - name: Install Python
       run: |
-        python -m pip install --upgrade pip
-        pip install setuptools wheel twine
-    - name: Build and publish
-      env:
-        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
-        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        mkdir python
+        cd python
+        curl https://www.python.org/ftp/python/3.8.5/python-3.8.5-embed-amd64.zip -o python-3.8.5-embed-amd64.zip
+        tar.exe -x -f python-3.8.5-embed-amd64.zip
+    - name: Install pip
       run: |
-        python setup.py sdist bdist_wheel
-        twine upload dist/*
+        cd python
+        curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+        .\python get-pip.py
+    - name: Python overrides
+      run: |
+        copy .\distribution_files\python38._pth .\python\
+
