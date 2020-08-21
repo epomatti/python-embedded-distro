@@ -11,21 +11,25 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install Python
       run: |
-        mkdir python
-        cd python
+        mkdir build
+        cd build
         curl https://www.python.org/ftp/python/3.8.5/python-3.8.5-embed-amd64.zip -o python-3.8.5-embed-amd64.zip
-        tar.exe -x -f python-3.8.5-embed-amd64.zip
+        tar -x -f python-3.8.5-embed-amd64.zip
     - name: Install pip
       run: |
-        cd python
+        cd build
         curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
         .\python get-pip.py
+    - name: Copy source
+      run: |
+        copy .\src\* .\build\
+        copy requirements.txt .\build\
+        copy .\release\python38._pth .\build\
+        copy .\release\app.bat .\build\
     - name: Download Dependencies
       run: |
-        .\python\python -m pip install -r requirements.txt
-    - name: Python overrides
+        cd build
+        .\python -m pip install -r requirements.txt
+    - name: Zip Distribution
       run: |
-        copy .\distribution_files\python38._pth .\python\
-    - name: App Executables
-      run: |
-        copy .\distribution_files\app.bat .
+        tar cf app.zip -C build *

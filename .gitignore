@@ -1,6 +1,6 @@
 ### App
-python
-app.bat
+build
+app.zip
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
