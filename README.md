@@ -1,5 +1,7 @@
 # Python Embedded Distribution
 
+![python](https://github.com/epomatti/python-embedded-distro/workflows/python/badge.svg)
+
 A sample that uses Python embedded release to publish a simple app.
 
 All the relevant code for distribution is in the [workflow](.github/workflows/windows).
