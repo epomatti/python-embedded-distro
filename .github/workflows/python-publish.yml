@@ -20,8 +20,12 @@ jobs:
         cd python
         curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
         .\python get-pip.py
+    - name: Download Dependencies
+      run: |
+        .\python\python -m pip install -r requirements.txt
     - name: Python overrides
       run: |
         copy .\distribution_files\python38._pth .\python\
-    - name: 
-
+    - name: App Executables
+      run: |
+        copy .\distribution_files\app.bat .

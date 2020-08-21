@@ -1,5 +1,6 @@
 ### App
-.\python\
+python
+app.bat
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
