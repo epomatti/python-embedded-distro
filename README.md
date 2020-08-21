@@ -4,9 +4,9 @@
 
 A sample that uses Python embedded release to publish a simple app.
 
-All the relevant code for distribution is in the [workflow](.github/workflows/windows).
+The release process is automated into the [workflow](.github/workflows/python-publish.yml)
 
-Configuration process:
+Overview of the configuration process:
 
 1. Download and extract Python embedded
 2. Copy the distribution files
